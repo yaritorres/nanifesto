@@ -27,6 +27,7 @@ const config: Config = {
         fadeIn: {
           '0%': {
             opacity: '0',
+            display: 'none'
           },
           '100%': {
             opacity: '1',
@@ -36,8 +37,8 @@ const config: Config = {
       },
       animation: {
         ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1)',
-        fadeOut: 'fadeOut 1s linear forwards',
-        fadeIn: 'fadeIn 1s linear forwards',
+        fadeOut: 'fadeOut 2s linear forwards',
+        fadeIn: 'fadeIn 3s linear forwards',
       }
     },
   },

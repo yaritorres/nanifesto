@@ -44,9 +44,9 @@ export default function Home() {
           ${ hamOpen ? 'left-2 opacity-100' : '-left-16 opacity-0'}`
         }
       >
-        <li className={`block`}>list item</li>
-        <li className={`block`}>list item</li>
-        <li className={`block`}>list item</li>
+        <li className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}>list item</li>
+        <li className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}>list item</li>
+        <li className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}>list item</li>
       </ul>
       <Welcome animate={animate} setAnimate={setAnimate} hamOpen={hamOpen} />
       <Homepage animate={animate} hamOpen={hamOpen} />

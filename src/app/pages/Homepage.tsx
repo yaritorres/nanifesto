@@ -2,14 +2,13 @@ export default function Homepage({ animate, hamOpen } : { animate:boolean, hamOp
   return (
     <div
     className={
-      `flex w-screen h-screen bg-slate-100 place-content-center place-items-center transition-all ${ hamOpen ? 'blur-lg' : '' }
-      ${ animate && 'animate-fadeIn animation-delay-[1s]' }`
+      `w-screen h-screen bg-slate-100 place-content-center place-items-center transition-all ${ hamOpen ? 'blur-lg' : '' }
+      ${ animate && 'animate-fadeIn' }`
     }
   >
     <div
       className={
-        `flex border-green-900 border-solid border-4 rounded-lg w-2/4 h-1/4 place-items-center
-        transition-all ${ hamOpen ? '' : 'hover:bg-green-900 hover:cursor-pointer' }`
+        `flex w-2/4 h-1/4 place-items-center`
       }
     >
       <h1 className='font-mono text-6xl text-center text-lime-400 select-none'>

@@ -5,7 +5,8 @@ export default function Welcome({ animate, setAnimate, hamOpen } : { animate:boo
   return (
     <div
       className={
-        `flex w-screen h-screen bg-slate-100 place-content-center place-items-center transition-all ${ hamOpen ? 'blur-lg' : '' }
+        `fixed flex w-screen h-screen bg-slate-100 place-content-center place-items-center transition-all z-30
+        ${ hamOpen ? 'blur-lg' : '' }
         ${ animate && 'animate-fadeOut' }`
       }
     >
