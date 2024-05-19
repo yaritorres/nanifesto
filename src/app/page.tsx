@@ -1,5 +1,6 @@
 'use client'
-import './globals.css'
+import './globals.css';
+import Link from 'next/link';
 import { useState } from "react";
 import Welcome from "./pages/Welcome";
 import Homepage from "./pages/Homepage";
@@ -40,13 +41,13 @@ export default function Home() {
       </button>
       <ul
         className={
-          `fixed top-16 left-2 bg-lime-400 h-24 w-40 rounded flex flex-col justify-center items-center z-40 transition-all
-          ${ hamOpen ? 'left-2 opacity-100' : '-left-16 opacity-0'}`
+          `fixed top-16 left-2 bg-lime-400 h-3/4 w-40 rounded flex flex-col justify-center items-center z-40 transition-all duration-300
+          ${ hamOpen ? 'left-2 opacity-100' : '-left-1/4 opacity-0'}`
         }
       >
-        <li className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}>list item</li>
-        <li className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}>list item</li>
-        <li className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}>list item</li>
+        <Link href='/new-post' className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}> New Post </Link>
+        <Link href='' className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}> Settings </Link>
+        <Link href='' className={`text-xl block transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}> Dark Mode </Link>
       </ul>
       <Welcome animate={animate} setAnimate={setAnimate} hamOpen={hamOpen} />
       <Homepage animate={animate} hamOpen={hamOpen} />

@@ -1,5 +1,4 @@
 'use client'
-import '../styles/Welcome.css';
 
 export default function Welcome({ animate, setAnimate, hamOpen } : { animate:boolean, setAnimate:Function, hamOpen:boolean }) {
   return (

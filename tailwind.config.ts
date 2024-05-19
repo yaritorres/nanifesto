@@ -37,7 +37,7 @@ const config: Config = {
       },
       animation: {
         ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1)',
-        fadeOut: 'fadeOut 2s linear forwards',
+        fadeOut: 'fadeOut 1.5s linear forwards',
         fadeIn: 'fadeIn 3s linear forwards',
       }
     },
