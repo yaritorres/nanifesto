@@ -1,8 +1,10 @@
 'use client'
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolean, setHamOpen:Function }) {
   const handleHam = () => { setHamOpen(!hamOpen) };
+  var path = usePathname();
 
   return (
     <div>
@@ -10,7 +12,7 @@ export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolea
         onClick={handleHam}
         className={
           `fixed top-2 left-2 flex flex-col space-y-1 h-12 w-14 bg-green-900 rounded justify-center items-center
-          transition hover:bg-green-700 z-40 ${ hamOpen ? 'block' : 'block' }`
+          transition hover:bg-green-700 z-40`
         }
       >
         <span
@@ -39,10 +41,10 @@ export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolea
         }
       >
         <Link
-          href='/new-post'
+          href={path === '/new-post' ? '/home' : '/new-post'}
           className={`text-xl block font-mono transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}
         >
-          New Post
+          {path === '/new-post' ? 'Home' : 'New Post'}
         </Link>
         <Link
           href=''

@@ -8,14 +8,33 @@ export default function Blog() {
   return (
     <>
       <HamburgerMenu hamOpen={hamOpen} setHamOpen={setHamOpen} />
-      <div className='flex w-screen h-screen bg-slate-100 place-items-center place-content-center'>
+      <div className={`flex w-screen h-screen bg-slate-100 place-items-center place-content-center ${ hamOpen ? 'blur-lg' : '' }`}>
         <form className='flex w-3/6 h-3/6 rounded border-green-900 border-solid border-4 p-5 justify-center items-start flex-col space-y-2'>
-          <label className='font-mono text-green-900'> title </label>
-          <input type='text' className='bg-lime-400 rounded border-solid border-2 border-green-900 w-1/4'>
+          <label className='font-mono text-green-900 select-none'> title </label>
+          <input
+            type='text'
+            className={
+              `bg-lime-400 rounded border-solid border-2 border-green-900 w-1/4 p-2 overflow-x-auto
+              ${ hamOpen ? 'hover:cursor-default' : ''}`
+            }
+          >
           </input>
-          <label className='font-mono text-green-900'> body </label>
-          <textarea className='bg-lime-400 rounded border-solid border-2 border-green-900 w-full h-full p-2 overflow-y-auto resize-none'>
+          <label className='font-mono text-green-900 select-none'> body </label>
+          <textarea
+            className={
+              `bg-lime-400 rounded border-solid border-2 border-green-900 w-full h-full p-2 overflow-y-auto resize-none
+              ${ hamOpen ? 'hover:cursor-default' : ''}`
+            }
+            >
           </textarea>
+          <input
+            type='submit'
+            value='save and post'
+            className={
+              `bg-green-900 text-lime-400 rounded p-2 self-end transition-all ${ hamOpen ? '' : 'hover:bg-green-700 hover:cursor-pointer'}`
+            }
+          >
+          </input>
         </form>
       </div>
     </>
