@@ -41,22 +41,31 @@ export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolea
         }
       >
         <Link
-          href={path === '/new-post' ? '/home' : '/new-post'}
-          className={`text-xl block font-mono transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}
+          href='/home'
+          className={
+            `text-xl block font-mono text-green-900 transition hover:text-green-700
+            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`
+          }
         >
-          {path === '/new-post' ? 'Home' : 'New Post'}
+          Home
         </Link>
         <Link
-          href=''
-          className={`text-xl block font-mono transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}
+          href='/new-post'
+          className={`
+            text-xl block font-mono text-green-900 transition hover:text-green-700
+            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`
+          }
+        >
+          New Post
+        </Link>
+        <Link
+          href='/settings'
+          className={`
+            text-xl block font-mono text-green-900 transition hover:text-green-700
+            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`
+          }
         >
           Settings
-        </Link>
-        <Link
-          href=''
-          className={`text-xl block font-mono transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`}
-        >
-          Dark Mode
         </Link>
       </ul>
     </div>

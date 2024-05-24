@@ -11,7 +11,7 @@ export default function Welcome() {
       <div
         className={
           `flex border-green-900 border-solid border-4 rounded-lg w-2/4 h-1/4 place-items-center
-          transition-all hover:bg-green-900 hover:cursor-pointer`
+          transition hover:bg-green-900 hover:cursor-pointer`
         }
       >
         <Link
