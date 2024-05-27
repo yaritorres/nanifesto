@@ -10,7 +10,7 @@ export default function Homepage() {
       <HamburgerMenu hamOpen={hamOpen} setHamOpen={setHamOpen} />
       <div
         className={
-          `flex w-screen h-screen bg-slate-100 place-content-center place-items-center transition-all
+          `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center transition-all
           ${ hamOpen ? 'blur-lg' : '' }`
         }
       >

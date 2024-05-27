@@ -5,7 +5,7 @@ export default function Welcome() {
   return (
     <div
       className={
-        `fixed flex w-screen h-screen bg-slate-100 place-content-center place-items-center transition-all z-30`
+        `fixed flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center transition-all z-30`
       }
     >
       <div

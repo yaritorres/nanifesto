@@ -1,10 +1,8 @@
 'use client'
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolean, setHamOpen:Function }) {
   const handleHam = () => { setHamOpen(!hamOpen) };
-  var path = usePathname();
 
   return (
     <div>

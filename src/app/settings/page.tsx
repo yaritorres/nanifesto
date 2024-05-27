@@ -1,8 +1,23 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Settings() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState('');
+
+  useEffect(() => {
+    const savedMode = window.localStorage.getItem('theme');
+    document.documentElement.classList.remove(savedMode);
+    console.log('saved mode 1:', savedMode);
+    setDark(savedMode);
+    document.documentElement.classList.add(savedMode);
+    console.log('saved mode 2:', savedMode);
+  }, [dark]);
+
+  useEffect(() => {
+    if (!window.localStorage.getItem('theme')) {
+      window.localStorage.setItem('theme', dark);
+    }
+  });
 
   return(
     <div className={`flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center`}>
@@ -14,13 +29,21 @@ export default function Settings() {
         <span
           className={`font-mono text-lime-400 text-3xl hover:cursor-pointer transition hover:text-green-900`}
           onClick={ () => {
-            setDark(!dark);
-            document.documentElement.classList.remove( dark ? 'dark' : 'light' );
-            document.documentElement.classList.add( dark ? 'light' : 'dark' );
-            localStorage.theme = dark ? 'dark' : 'light';
+            if (dark === 'dark') {
+              setDark('light');
+            } else {
+              setDark('dark');
+            }
+
+            if (dark === 'dark') {
+              window.localStorage.setItem('theme', 'light');
+            } else {
+              window.localStorage.setItem('theme', 'light');
+            }
+            console.log('local storage:', window.localStorage.getItem('theme'));
           } }
         >
-          { dark ? 'Light Mode' : 'Dark Mode' }
+          { dark === 'light' ? 'Light Mode' : 'Dark Mode' }
         </span>
       </div>
     </div>
