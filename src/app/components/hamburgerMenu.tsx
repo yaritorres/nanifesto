@@ -57,6 +57,15 @@ export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolea
           New Post
         </Link>
         <Link
+          href='/view-posts'
+          className={`
+            text-xl block font-mono text-green-900 transition hover:text-green-700
+            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`
+          }
+        >
+          View Posts
+        </Link>
+        <Link
           href='/settings'
           className={`
             text-xl block font-mono text-green-900 transition hover:text-green-700
