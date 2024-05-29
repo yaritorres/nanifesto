@@ -6,18 +6,15 @@ export default function Settings() {
 
   useEffect(() => {
     const savedMode = window.localStorage.getItem('theme');
-    document.documentElement.classList.remove(savedMode);
     console.log('saved mode 1:', savedMode);
-    setDark(savedMode);
-    document.documentElement.classList.add(savedMode);
-    console.log('saved mode 2:', savedMode);
-  }, [dark]);
 
-  useEffect(() => {
-    if (!window.localStorage.getItem('theme')) {
-      window.localStorage.setItem('theme', dark);
+    if (savedMode === '') {
+      document.documentElement.classList.add('dark');
+      window.localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.add(savedMode);
     }
-  });
+  }, [dark]);
 
   return(
     <div className={`flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center`}>
@@ -29,18 +26,19 @@ export default function Settings() {
         <span
           className={`font-mono text-lime-400 text-3xl hover:cursor-pointer transition hover:text-green-900`}
           onClick={ () => {
-            if (dark === 'dark') {
+            if (dark === 'dark' || dark === '') {
               setDark('light');
+              document.documentElement.classList.remove('dark');
+              document.documentElement.classList.add('light');
+              window.localStorage.setItem('theme', 'light');
             } else {
               setDark('dark');
-            }
-
-            if (dark === 'dark') {
-              window.localStorage.setItem('theme', 'light');
-            } else {
-              window.localStorage.setItem('theme', 'light');
+              document.documentElement.classList.remove('light');
+              document.documentElement.classList.add('dark');
+              window.localStorage.setItem('theme', 'dark');
             }
             console.log('local storage:', window.localStorage.getItem('theme'));
+            console.log('mode after click:', dark);
           } }
         >
           { dark === 'light' ? 'Light Mode' : 'Dark Mode' }

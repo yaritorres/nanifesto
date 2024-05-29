@@ -1,9 +1,21 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HamburgerMenu from "../components/hamburgerMenu";
 
 export default function Blog() {
   const [hamOpen, setHamOpen] = useState(false);
+
+  useEffect(() => {
+    const savedMode = window.localStorage.getItem('theme');
+    console.log('saved mode 1:', savedMode);
+
+    if (savedMode === '') {
+      document.documentElement.classList.add('dark');
+      window.localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.add(savedMode);
+    }
+  }, []);
 
   return (
     <>
