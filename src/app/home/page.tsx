@@ -7,7 +7,6 @@ export default function Homepage() {
 
   useEffect(() => {
     const savedMode = window.localStorage.getItem('theme');
-    console.log('saved mode 1:', savedMode);
 
     if (savedMode === '') {
       document.documentElement.classList.add('dark');
