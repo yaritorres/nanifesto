@@ -15,26 +15,26 @@ export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolea
       >
         <span
           className={
-            `h-1 w-8 rounded bg-lime-400 block transition-all`
+            `h-1 w-8 rounded bg-lime-500 block transition-all`
           }
         >
         </span>
         <span
           className={
-            `h-1 rounded bg-lime-400 block transition-all ${ hamOpen ? 'w-6' : 'w-8' }`
+            `h-1 rounded bg-lime-500 block transition-all ${ hamOpen ? 'w-6' : 'w-8' }`
           }
         >
         </span>
         <span
           className={
-            `h-1 rounded bg-lime-400 block transition-all ${ hamOpen ? 'w-4' : 'w-8' }`
+            `h-1 rounded bg-lime-500 block transition-all ${ hamOpen ? 'w-4' : 'w-8' }`
           }
         >
         </span>
       </button>
       <ul
         className={
-          `fixed top-16 left-2 bg-lime-400 p-4 h-fit-content w-40 rounded flex flex-col justify-center items-center z-40 transition-all duration-300
+          `fixed top-16 left-2 bg-lime-500 p-4 h-fit-content w-40 rounded flex flex-col justify-center items-center z-40 transition-all duration-300
           ${ hamOpen ? 'left-2 opacity-100' : '-left-1/4 opacity-0'}`
         }
       >

@@ -12,9 +12,15 @@ const db = new Pool({
 db.connect();
 
 const getPosts = () => {
-  console.log('getting posts...');
   return db.query(`
     SELECT * FROM posts
+  `);
+}
+
+const newPost = (title, body, date) => {
+  return db.query(`
+    INSERT INTO posts (user, title, body, date)
+      VALUES (nani, ${title}, ${body}, ${date})
   `);
 }
 

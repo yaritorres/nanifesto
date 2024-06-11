@@ -61,12 +61,12 @@ export default function ViewPosts() {
           <li
             key={postId}
             className={
-              `rounded bg-lime-400 font-mono text-2xl w-full h-auto justify-start p-4 space-y-4`
+              `rounded bg-lime-500 w-full h-auto space-y-4`
             }
           >
-            <label>{post.title}</label>
-            <p>{post.body}</p>
-            <span>posted: {post.date_posted}</span>
+            <label className={`rounded w-full h-auto font-mono text-3xl bg-lime-700 p-2`}> {post.title} </label>
+            <p className={`w-full h-auto p-2 font-mono text-xl`}> {post.body} </p>
+            <span className={`w-full h-auto p-2 font-mono text-lg text-lime-300`}> posted: {post.date_posted} </span>
           </li>
         )}
         </ul>
