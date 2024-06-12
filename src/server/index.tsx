@@ -18,3 +18,13 @@ app.get(`/posts`, (req, res) => {
   })
   .catch(err => console.log(err));
 });
+
+app.post('/posts', (req, res) => {
+  postgres.newPost(req.body)
+  .then(response => {
+    res.send(response);
+  })
+  .catch(err => {
+    console.log('ruh roh cant post:', err);
+  })
+})

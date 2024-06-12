@@ -17,13 +17,14 @@ const getPosts = () => {
   `);
 }
 
-const newPost = (title, body, date) => {
+const newPost = ({ title, body, date }) => {
   return db.query(`
-    INSERT INTO posts (user, title, body, date)
-      VALUES (nani, ${title}, ${body}, ${date})
+    INSERT INTO posts (username, title, body, date_posted)
+      VALUES ('nani', '${title}', '${body}', '${date}')
   `);
 }
 
 module.exports = {
   getPosts: getPosts,
+  newPost: newPost,
 };
