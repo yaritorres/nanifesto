@@ -17,10 +17,10 @@ const getPosts = () => {
   `);
 }
 
-const newPost = ({ title, body, date }) => {
+const newPost = ({ title, body }) => {
   return db.query(`
     INSERT INTO posts (username, title, body, date_posted)
-      VALUES ('nani', '${title}', '${body}', '${date}')
+      VALUES ('nani', '${title}', '${body}', CURRENT_DATE)
   `);
 }
 

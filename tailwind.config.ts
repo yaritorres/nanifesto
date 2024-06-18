@@ -33,12 +33,23 @@ const config: Config = {
             opacity: '1',
             display: 'flex',
           }
+        },
+        fadeInThenOut: {
+          '0%, 100%': {
+            opacity: '0',
+            display: 'none'
+          },
+          '10%, 90%': {
+            opacity: '1',
+            display: 'flex'
+          },
         }
       },
       animation: {
         ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1)',
         fadeOut: 'fadeOut 1.5s linear forwards',
         fadeIn: 'fadeIn 3s linear forwards',
+        fadeInThenOut: 'fadeInThenOut 6s linear forwards',
       }
     },
   },

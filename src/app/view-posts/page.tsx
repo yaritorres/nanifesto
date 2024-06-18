@@ -13,16 +13,26 @@ export default function ViewPosts() {
       headers: {}
     };
 
+    const parseDate = (posts) => {
+      const cleanDate = (string:string) => {
+        return string.split('').splice(0, 10).join('');
+      }
+
+      for (let i = 0; i < posts.length; i++) {
+        console.log('array item:', posts[i]);
+        if (posts[i].date_posted) {
+          posts[i].date_posted = cleanDate(posts[i].date_posted);
+        }
+      }
+
+      return posts;
+    }
+
     const retrievePosts = () => {
       return axios.get(options.url, {headers: options.headers})
       .then(database => {
-        setPosts(database.data);
-        return database.data;
-      })
-      .then(fetchedPosts => {
-        console.log('fetched:', fetchedPosts);
-        console.log('posts:', posts);
-        // setPosts(fetchedPosts);
+        const adjustedData = parseDate(database.data);
+        setPosts(adjustedData.reverse());
       })
       .catch(err => console.log('API ERROR:', err))
     }
@@ -48,25 +58,38 @@ export default function ViewPosts() {
       <HamburgerMenu hamOpen={hamOpen} setHamOpen={setHamOpen} />
       <div
         className={
-          `fixed flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center
+          `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center
           transition-all ${ hamOpen ? 'blur-lg' : '' }`
         }
       >
         <ul
           className={
-            `flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-5/6 place-items-center place-content-center          overflow-y-auto space-y-2 p-8`
+            `flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-5/6 overflow-y-auto space-y-6 p-8`
           }
         >
         {posts.map((post, postId) =>
           <li
             key={postId}
             className={
-              `rounded bg-lime-500 w-full h-auto space-y-4`
+              `rounded bg-lime-500 w-full h-fit-content`
             }
           >
-            <label className={`rounded w-full h-auto font-mono text-3xl bg-lime-700 p-2`}> {post.title} </label>
-            <p className={`w-full h-auto p-2 font-mono text-xl`}> {post.body} </p>
-            <span className={`w-full h-auto p-2 font-mono text-lg text-lime-300`}> posted: {post.date_posted} </span>
+            <label
+              className={
+                `block rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`
+              }
+            >
+              {post.title}
+            </label>
+            <div className={`border-solid border-slate-900 border-2 w-full mb-2`}></div>
+            <p className={`w-full h-auto p-4 font-mono text-slate-900 text-xl select-none`}> {post.body} </p>
+            <span
+              className={
+                `block w-fit h-auto font-mono text-lg text-lime-300 select-none m-4 mt-0`
+              }
+            >
+              posted: {post.date_posted}
+            </span>
           </li>
         )}
         </ul>
