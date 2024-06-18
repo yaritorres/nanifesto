@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: 'selector',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,8 +14,47 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      keyframes: {
+        fadeOut: {
+          '0%': {
+            opacity: '1',
+          },
+          '100%': {
+            opacity: '0',
+            display: 'none',
+          }
+        },
+        fadeIn: {
+          '0%': {
+            opacity: '0',
+            display: 'none'
+          },
+          '100%': {
+            opacity: '1',
+            display: 'flex',
+          }
+        },
+        fadeInThenOut: {
+          '0%, 100%': {
+            opacity: '0',
+            display: 'none'
+          },
+          '10%, 90%': {
+            opacity: '1',
+            display: 'flex'
+          },
+        }
+      },
+      animation: {
+        ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1)',
+        fadeOut: 'fadeOut 1.5s linear forwards',
+        fadeIn: 'fadeIn 3s linear forwards',
+        fadeInThenOut: 'fadeInThenOut 6s linear forwards',
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
 export default config;
