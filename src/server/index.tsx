@@ -25,6 +25,16 @@ app.post('/posts', (req, res) => {
     res.send(response);
   })
   .catch(err => {
-    console.log('ruh roh cant post:', err);
+    console.log('cant post:', err);
+  })
+})
+
+app.put('/posts', (req, res) => {
+  postgres.deletePost(req.body)
+  .then(response => {
+    res.send(response);
+  })
+  .catch(err => {
+    console.log('couldnt delete:', err);
   })
 })

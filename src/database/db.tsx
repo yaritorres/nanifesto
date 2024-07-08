@@ -15,16 +15,23 @@ const getPosts = () => {
   return db.query(`
     SELECT * FROM posts
   `);
-}
+};
 
 const newPost = ({ title, body }) => {
   return db.query(`
     INSERT INTO posts (username, title, body, date_posted)
       VALUES ('nani', '${title}', '${body}', CURRENT_DATE)
   `);
+};
+
+const deletePost = ({ id }) => {
+  return db.query(`
+    DELETE FROM posts WHERE id = ${id}
+  `)
 }
 
 module.exports = {
   getPosts: getPosts,
   newPost: newPost,
+  deletePost: deletePost,
 };

@@ -43,11 +43,11 @@ export default function Blog() {
       <div
         className={
           `flex w-1/6 h-1/6 bg-green-900 rounded fixed top-2 right-2 text-2xl text-lime-500 items-center justify-center
-          ${posted !== undefined ? 'animate-fadeInThenOut' : 'hidden'}`
+          ${posted !== undefined ? 'animate-fadeInThenOut' : 'block'}`
         }
         onAnimationEnd={() => { setPosted(undefined)} }
       >
-        {posted ? 'posted!' : 'oops, didnt post!'}
+        posted!
       </div>
       <div
         className={
@@ -71,7 +71,7 @@ export default function Blog() {
             id='body'
             className={
               `dark:text-white bg-lime-400 dark:bg-green-900 rounded border-solid border-2 border-green-900 w-full h-full p-2 overflow-y-auto resize-none
-              ${ hamOpen ? 'hover:cursor-default' : ''}`
+              ${ hamOpen ? 'hover:cursor-default' : ''} ${ bodyExists ? 'border-green-900' : 'border-red-900' }`
             }
             >
           </textarea>
@@ -92,8 +92,12 @@ export default function Blog() {
                   setTitleExists(true);
                   setBodyExists(true);
                   savePost(title, body);
-                } else {
+                } else if (!title && body) {
                   setTitleExists(false);
+                  setBodyExists(true);
+                  setPosted(false);
+                } else if (title && !body) {
+                  setTitleExists(true);
                   setBodyExists(false);
                   setPosted(false);
                 }

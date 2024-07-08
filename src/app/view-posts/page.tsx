@@ -6,6 +6,21 @@ const axios = require('axios').default;
 export default function ViewPosts() {
   const [hamOpen, setHamOpen] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [deleted, setDeleted] = useState(0);
+
+  const handleDelete = (id: Number) => {
+    const options = {
+      url: 'http://localhost:3000/posts',
+      headers: {}
+    };
+
+    axios.put(options.url, {id: id}, {headers: options.headers})
+    .then(response => {
+      setDeleted(id);
+      console.log(response);
+    })
+    .catch(err => console.log(err))
+  }
 
   useEffect(() => {
     const options = {
@@ -41,7 +56,6 @@ export default function ViewPosts() {
   }, [JSON.stringify(posts)])
 
 
-
   useEffect(() => {
     const savedMode = window.localStorage.getItem('theme');
 
@@ -67,11 +81,14 @@ export default function ViewPosts() {
             `flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-5/6 overflow-y-auto space-y-6 p-8`
           }
         >
-        {posts.map((post, postId) =>
+        {posts.map((post, postKey) =>
           <li
-            key={postId}
+            key={postKey}
+            data-key={post.id}
+            id={post.id}
             className={
-              `rounded bg-lime-500 w-full h-fit-content`
+              `rounded bg-lime-500 w-full h-fit-content
+              ${ deleted === document.getElementById(deleted)?.getAttribute('data-key') ? 'animate-fadeOut' : '' }`
             }
           >
             <label
@@ -80,8 +97,21 @@ export default function ViewPosts() {
               }
             >
               {post.title}
+              <button
+                data-key={post.id}
+                onClick={
+                  e => {
+                    const target = e.target as HTMLButtonElement;
+                    console.log('HERE IS THE KEY:', target.getAttribute('data-key'));
+                    handleDelete(target.getAttribute('data-key'));
+                  }
+                }
+                className={`w-auto h-auto text-white justify-self-end`}
+              >
+                delete
+              </button>
             </label>
-            <div className={`border-solid border-slate-900 border-2 w-full mb-2`}></div>
+            <div className={`border-solid border-slate-100 dark:border-slate-900 border-2 w-full mb-2`}></div>
             <p className={`w-full h-auto p-4 font-mono text-slate-900 text-xl select-none`}> {post.body} </p>
             <span
               className={
