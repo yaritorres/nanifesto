@@ -14,11 +14,14 @@ export default function ViewPosts() {
       headers: {}
     };
 
+    document.getElementById(id)?.classList.add('animate-fadeOut')
+
     axios.put(options.url, {id: id}, {headers: options.headers})
     .then(response => {
       setDeleted(id);
       console.log(response);
     })
+    .then(() => setDeleted(0))
     .catch(err => console.log(err))
   }
 
@@ -84,11 +87,9 @@ export default function ViewPosts() {
         {posts.map((post, postKey) =>
           <li
             key={postKey}
-            data-key={post.id}
             id={post.id}
             className={
-              `rounded bg-lime-500 w-full h-fit-content
-              ${ deleted === document.getElementById(deleted)?.getAttribute('data-key') ? 'animate-fadeOut' : '' }`
+              `rounded bg-lime-500 w-full h-fit-content`
             }
           >
             <label
