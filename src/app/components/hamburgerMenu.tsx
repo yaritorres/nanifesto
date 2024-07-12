@@ -5,7 +5,7 @@ export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolea
   const handleHam = () => { setHamOpen(!hamOpen) };
 
   return (
-    <div>
+    <div className='backdrop-blur-sm'>
       <button
         onClick={handleHam}
         className={
@@ -15,22 +15,26 @@ export default function HamburgerMenu({ hamOpen, setHamOpen } : { hamOpen:boolea
       >
         <span
           className={
-            `h-1 w-8 rounded bg-lime-500 block transition-all`
+            `block h-1 w-8 rounded bg-lime-500 transition-all`
           }
         >
         </span>
-        <span
-          className={
-            `h-1 rounded bg-lime-500 block transition-all ${ hamOpen ? 'w-6' : 'w-8' }`
-          }
-        >
-        </span>
-        <span
-          className={
-            `h-1 rounded bg-lime-500 block transition-all ${ hamOpen ? 'w-4' : 'w-8' }`
-          }
-        >
-        </span>
+        <div className='w-8'>
+          <span
+            className={
+              `h-1 rounded bg-lime-500 block transition-all ${ hamOpen ? 'w-6 place-self-start' : 'w-8' }`
+            }
+          >
+          </span>
+        </div>
+        <div className='w-8'>
+          <span
+            className={
+              `h-1 rounded bg-lime-500 block transition-all ${ hamOpen ? 'w-4 place-self-start' : 'w-8' }`
+            }
+          >
+          </span>
+        </div>
       </button>
       <ul
         className={

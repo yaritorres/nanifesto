@@ -6,7 +6,6 @@ const axios = require('axios').default;
 export default function ViewPosts() {
   const [hamOpen, setHamOpen] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [deleted, setDeleted] = useState(0);
 
   const handleDelete = (id: Number) => {
     const options = {
@@ -18,10 +17,8 @@ export default function ViewPosts() {
 
     axios.put(options.url, {id: id}, {headers: options.headers})
     .then(response => {
-      setDeleted(id);
       console.log(response);
     })
-    .then(() => setDeleted(0))
     .catch(err => console.log(err))
   }
 
@@ -76,7 +73,7 @@ export default function ViewPosts() {
       <div
         className={
           `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center
-          transition-all ${ hamOpen ? 'blur-lg' : '' }`
+          transition-all`
         }
       >
         <ul
@@ -94,7 +91,7 @@ export default function ViewPosts() {
           >
             <label
               className={
-                `block rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`
+                `flex rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`
               }
             >
               {post.title}
@@ -107,7 +104,7 @@ export default function ViewPosts() {
                     handleDelete(target.getAttribute('data-key'));
                   }
                 }
-                className={`w-auto h-auto text-white justify-self-end`}
+                className={`flex w-full h-auto text-white place-content-end`}
               >
                 delete
               </button>
