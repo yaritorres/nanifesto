@@ -30,8 +30,7 @@ const config: Config = {
             display: 'none'
           },
           '100%': {
-            opacity: '1',
-            display: 'flex',
+            opacity: '1'
           }
         },
         fadeInThenOut: {

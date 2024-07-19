@@ -6,6 +6,8 @@ export default function Settings() {
   const [dark, setDark] = useState('');
   const [hamOpen, setHamOpen] = useState(false);
 
+  const handleHam = () => { setHamOpen(!hamOpen) };
+
   useEffect(() => {
     const savedMode = window.localStorage.getItem('theme');
 
@@ -21,7 +23,7 @@ export default function Settings() {
 
   return(
     <>
-      <HamburgerMenu hamOpen={hamOpen} setHamOpen={setHamOpen} />
+      <HamburgerMenu hamOpen={hamOpen} handleHam={handleHam} />
       <div className={`flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center`}>
         <div
           className={
