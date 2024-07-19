@@ -7,6 +7,8 @@ export default function ViewPosts() {
   const [hamOpen, setHamOpen] = useState(false);
   const [posts, setPosts] = useState([]);
 
+  const handleHam = () => { setHamOpen(!hamOpen) };
+
   const handleDelete = (id: Number) => {
     const options = {
       url: 'http://localhost:3000/posts',
@@ -22,22 +24,17 @@ export default function ViewPosts() {
     .catch(err => console.log(err))
   }
 
+  // GRABS CURRENT POSTS FOUND IN DATABASE AND CUTS OFF PART OF THE DATE THAT
+  // IS BEING ADDED ON BY THE DATABASE FOR SOME REASON (IT ADDS TIME POSTED BUT DEFAULTS TO 00:00:00)
   useEffect(() => {
     const options = {
       url: 'http://localhost:3000/posts',
       headers: {}
     };
 
-    const parseDate = (posts) => {
-      const cleanDate = (string:string) => {
-        return string.split('').splice(0, 10).join('');
-      }
-
+    const cleanDate = (posts) => {
       for (let i = 0; i < posts.length; i++) {
-        console.log('array item:', posts[i]);
-        if (posts[i].date_posted) {
-          posts[i].date_posted = cleanDate(posts[i].date_posted);
-        }
+        posts[i].date_posted = posts[i].date_posted.split('').splice(0, 10).join('');
       }
 
       return posts;
@@ -46,7 +43,7 @@ export default function ViewPosts() {
     const retrievePosts = () => {
       return axios.get(options.url, {headers: options.headers})
       .then(database => {
-        const adjustedData = parseDate(database.data);
+        const adjustedData = cleanDate(database.data);
         setPosts(adjustedData.reverse());
       })
       .catch(err => console.log('API ERROR:', err))
@@ -55,7 +52,8 @@ export default function ViewPosts() {
     retrievePosts();
   }, [JSON.stringify(posts)])
 
-
+  // SETS CURRENT THEME (LIGHT OR DARK) ON PAGE USING LOCAL STORAGE,
+  // OTHERWISE DEFAULTS TO DARKMODE IF NONE IS SET
   useEffect(() => {
     const savedMode = window.localStorage.getItem('theme');
 
@@ -69,7 +67,7 @@ export default function ViewPosts() {
 
   return (
     <>
-      <HamburgerMenu hamOpen={hamOpen} setHamOpen={setHamOpen} />
+      <HamburgerMenu hamOpen={hamOpen} handleHam={handleHam} />
       <div
         className={
           `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center
@@ -91,7 +89,7 @@ export default function ViewPosts() {
           >
             <label
               className={
-                `flex rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`
+                `relative flex rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none border-red-900 border-solid border-2`
               }
             >
               {post.title}
@@ -104,7 +102,7 @@ export default function ViewPosts() {
                     handleDelete(target.getAttribute('data-key'));
                   }
                 }
-                className={`flex w-full h-auto text-white place-content-end`}
+                className={`right-1 flex w-1/3 text-white justify-self-end justify-end border-red-900 border-solid border-2`}
               >
                 delete
               </button>
