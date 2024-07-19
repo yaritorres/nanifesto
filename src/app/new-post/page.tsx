@@ -1,7 +1,8 @@
 'use client'
 import { useEffect, useState } from "react";
-import HamburgerMenu from "../components/hamburgerMenu";
 import { useRouter } from "next/navigation";
+import HamburgerMenu from "../components/hamburgerMenu";
+import PostedAlert from "../components/postedAlert";
 const axios = require('axios').default;
 
 export default function Blog() {
@@ -69,15 +70,7 @@ export default function Blog() {
   return (
     <>
       <HamburgerMenu hamOpen={hamOpen} handleHam={handleHam} />
-      <div
-        className={
-          `flex fixed w-1/6 h-1/6 bg-green-900 rounded fixed top-2 right-2 text-2xl text-lime-500 items-center justify-center
-          ${posted !== undefined ? 'animate-fadeInThenOut' : 'block'}`
-        }
-        onAnimationEnd={() => { setPosted(undefined); handleRouting(); } }
-      >
-        posted!
-      </div>
+      <PostedAlert posted={posted} setPosted={setPosted} handleRouting={handleRouting} />
       <div
         className={
           `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-items-center place-content-center`

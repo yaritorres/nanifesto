@@ -102,7 +102,7 @@ export default function ViewPosts() {
                     handleDelete(target.getAttribute('data-key'));
                   }
                 }
-                className={`right-1 flex w-1/3 text-white justify-self-end justify-end border-red-900 border-solid border-2`}
+                className={`absolute right-4 flex h-fit text-white`}
               >
                 delete
               </button>
