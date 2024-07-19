@@ -7,22 +7,34 @@ export default function ViewPosts() {
   const [hamOpen, setHamOpen] = useState(false);
   const [posts, setPosts] = useState([]);
 
+  const handleHam = () => { setHamOpen(!hamOpen) };
+
+  const handleDelete = (id: Number) => {
+    const options = {
+      url: 'http://localhost:3000/posts',
+      headers: {}
+    };
+
+    document.getElementById(id)?.classList.add('animate-fadeOut')
+
+    axios.put(options.url, {id: id}, {headers: options.headers})
+    .then(response => {
+      console.log(response);
+    })
+    .catch(err => console.log(err))
+  }
+
+  // GRABS CURRENT POSTS FOUND IN DATABASE AND CUTS OFF PART OF THE DATE THAT
+  // IS BEING ADDED ON BY THE DATABASE FOR SOME REASON (IT ADDS TIME POSTED BUT DEFAULTS TO 00:00:00)
   useEffect(() => {
     const options = {
       url: 'http://localhost:3000/posts',
       headers: {}
     };
 
-    const parseDate = (posts) => {
-      const cleanDate = (string:string) => {
-        return string.split('').splice(0, 10).join('');
-      }
-
+    const cleanDate = (posts) => {
       for (let i = 0; i < posts.length; i++) {
-        console.log('array item:', posts[i]);
-        if (posts[i].date_posted) {
-          posts[i].date_posted = cleanDate(posts[i].date_posted);
-        }
+        posts[i].date_posted = posts[i].date_posted.split('').splice(0, 10).join('');
       }
 
       return posts;
@@ -31,7 +43,7 @@ export default function ViewPosts() {
     const retrievePosts = () => {
       return axios.get(options.url, {headers: options.headers})
       .then(database => {
-        const adjustedData = parseDate(database.data);
+        const adjustedData = cleanDate(database.data);
         setPosts(adjustedData.reverse());
       })
       .catch(err => console.log('API ERROR:', err))
@@ -40,8 +52,8 @@ export default function ViewPosts() {
     retrievePosts();
   }, [JSON.stringify(posts)])
 
-
-
+  // SETS CURRENT THEME (LIGHT OR DARK) ON PAGE USING LOCAL STORAGE,
+  // OTHERWISE DEFAULTS TO DARKMODE IF NONE IS SET
   useEffect(() => {
     const savedMode = window.localStorage.getItem('theme');
 
@@ -55,11 +67,11 @@ export default function ViewPosts() {
 
   return (
     <>
-      <HamburgerMenu hamOpen={hamOpen} setHamOpen={setHamOpen} />
+      <HamburgerMenu hamOpen={hamOpen} handleHam={handleHam} />
       <div
         className={
           `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center
-          transition-all ${ hamOpen ? 'blur-lg' : '' }`
+          transition-all`
         }
       >
         <ul
@@ -67,21 +79,35 @@ export default function ViewPosts() {
             `flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-5/6 overflow-y-auto space-y-6 p-8`
           }
         >
-        {posts.map((post, postId) =>
+        {posts.map((post, postKey) =>
           <li
-            key={postId}
+            key={postKey}
+            id={post.id}
             className={
               `rounded bg-lime-500 w-full h-fit-content`
             }
           >
             <label
               className={
-                `block rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`
+                `relative flex rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none border-red-900 border-solid border-2`
               }
             >
               {post.title}
+              <button
+                data-key={post.id}
+                onClick={
+                  e => {
+                    const target = e.target as HTMLButtonElement;
+                    console.log('HERE IS THE KEY:', target.getAttribute('data-key'));
+                    handleDelete(target.getAttribute('data-key'));
+                  }
+                }
+                className={`absolute right-4 flex h-fit text-white`}
+              >
+                delete
+              </button>
             </label>
-            <div className={`border-solid border-slate-900 border-2 w-full mb-2`}></div>
+            <div className={`border-solid border-slate-100 dark:border-slate-900 border-2 w-full mb-2`}></div>
             <p className={`w-full h-auto p-4 font-mono text-slate-900 text-xl select-none`}> {post.body} </p>
             <span
               className={
