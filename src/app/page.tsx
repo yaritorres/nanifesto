@@ -1,12 +1,9 @@
 'use client'
 import './globals.css';
-import { useEffect, useState } from 'react';
-import HamburgerMenu from './components/hamburgerMenu';
+import { useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
-  const [hamOpen, setHamOpen] = useState(false);
-  const handleHam = () => { setHamOpen(!hamOpen) };
-
   // SETS CURRENT THEME (LIGHT OR DARK) ON PAGE USING LOCAL STORAGE,
   // OTHERWISE DEFAULTS TO DARKMODE IF NONE IS SET
   useEffect(() => {
@@ -22,7 +19,6 @@ export default function Home() {
 
   return (
     <main>
-      <HamburgerMenu hamOpen={hamOpen} handleHam={handleHam} />
       <div
         className={
           `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center`
@@ -30,15 +26,27 @@ export default function Home() {
       >
         <div
           className={
-            `flex w-2/4 h-1/4 place-items-center`
+            `flex flex-col w-5/6 sm:w-2/4 sm:flex space-y-4`
           }
         >
-          <button>
-            <link href='/Blog'></link>
-          </button>
-          <h1 className='font-mono text-6xl text-center text-lime-400 select-none'>
-            what would you like to do?
-          </h1>
+          <Link
+            className={
+              `font-mono p-4 text-2xl text-center text-lime-400 rounded border-lime-500 border-solid border-2 select-none
+              transition-all hover:bg-lime-500 hover:text-slate-900`
+            }
+            href='/new-post'
+          >
+            make a new post
+          </Link>
+          <Link
+            className={
+              `font-mono p-4 text-2xl text-center text-lime-400 rounded border-lime-500 border-solid border-2 select-none
+              transition-all hover:bg-lime-500 hover:text-slate-900`
+            }
+            href='/view-posts'
+          >
+            view posts
+          </Link>
         </div>
       </div>
     </main>

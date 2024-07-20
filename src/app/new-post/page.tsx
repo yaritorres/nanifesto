@@ -6,7 +6,6 @@ import PostedAlert from "../components/postedAlert";
 const axios = require('axios').default;
 
 export default function Blog() {
-  const [hamOpen, setHamOpen] = useState(false);
   const [posted, setPosted] = useState(undefined);
   const [titleExists, setTitleExists] = useState(true);
   const [bodyExists, setBodyExists] = useState(true);
@@ -15,7 +14,6 @@ export default function Blog() {
     router.push('/view-posts');
   }
 
-  const handleHam = () => { setHamOpen(!hamOpen) };
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -69,7 +67,6 @@ export default function Blog() {
 
   return (
     <>
-      <HamburgerMenu hamOpen={hamOpen} handleHam={handleHam} />
       <PostedAlert posted={posted} setPosted={setPosted} handleRouting={handleRouting} />
       <div
         className={
@@ -78,7 +75,7 @@ export default function Blog() {
       >
         <form
           className={
-            `flex w-3/6 h-3/6 rounded border-green-900 dark:border-lime-500 border-solid border-4 p-5 justify-center items-start flex-col space-y-2`
+            `flex w-5/6 sm:w-3/6 h-3/6 rounded border-green-900 dark:border-lime-500 border-solid border-4 p-5 justify-center items-start flex-col space-y-2`
           }
           onSubmit={handleSubmit}
         >
@@ -87,7 +84,7 @@ export default function Blog() {
             type='text'
             id='title'
             className={
-              `dark:text-white bg-lime-400 dark:bg-green-900 rounded border-solid border-2 w-1/4 p-2 overflow-x-auto
+              `dark:text-white bg-lime-400 dark:bg-green-900 rounded border-solid border-2 w-full sm:w-1/4 p-2 overflow-x-auto
               ${ titleExists ? 'border-green-900' : 'border-red-900' }`
             }
           >

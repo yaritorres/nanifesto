@@ -2,7 +2,8 @@ export default function PostedAlert({ posted, setPosted, handleRouting }:{ poste
   return (
     <div
       className={
-        `flex fixed w-screen h-screen backdrop-blur-sm items-center justify-center ${posted !== undefined ? 'animate-fadeIn' : 'hidden'}`
+        `flex fixed w-screen h-screen backdrop-blur-sm items-center justify-center
+        ${posted !== undefined && posted ? 'animate-fadeIn' : 'hidden'}`
       }
       onAnimationEnd={ () => { setPosted(undefined); handleRouting(); } }
     >
