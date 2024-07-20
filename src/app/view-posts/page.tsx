@@ -1,13 +1,9 @@
 'use client'
 import { useEffect, useState } from "react";
-import HamburgerMenu from "../components/hamburgerMenu";
 const axios = require('axios').default;
 
 export default function ViewPosts() {
-  const [hamOpen, setHamOpen] = useState(false);
   const [posts, setPosts] = useState([]);
-
-  const handleHam = () => { setHamOpen(!hamOpen) };
 
   const handleDelete = (id: Number) => {
     const options = {
@@ -67,7 +63,6 @@ export default function ViewPosts() {
 
   return (
     <>
-      <HamburgerMenu hamOpen={hamOpen} handleHam={handleHam} />
       <div
         className={
           `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center
@@ -76,7 +71,7 @@ export default function ViewPosts() {
       >
         <ul
           className={
-            `flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-5/6 overflow-y-auto space-y-6 p-8`
+            `flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-4/6 overflow-y-auto space-y-6 p-8`
           }
         >
         {posts.map((post, postKey) =>
@@ -89,7 +84,7 @@ export default function ViewPosts() {
           >
             <label
               className={
-                `relative flex rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none border-red-900 border-solid border-2`
+                `relative flex rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`
               }
             >
               {post.title}
@@ -98,11 +93,10 @@ export default function ViewPosts() {
                 onClick={
                   e => {
                     const target = e.target as HTMLButtonElement;
-                    console.log('HERE IS THE KEY:', target.getAttribute('data-key'));
                     handleDelete(target.getAttribute('data-key'));
                   }
                 }
-                className={`absolute right-4 flex h-fit text-white`}
+                className={`absolute right-4 flex h-fit text-white hover:cursor-pointer border-red-900 border-solid border-2`}
               >
                 delete
               </button>
