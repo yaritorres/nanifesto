@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import HamburgerMenu from "../components/hamburgerMenu";
 import PostedAlert from "../components/postedAlert";
 const axios = require('axios').default;
 
@@ -75,7 +74,7 @@ export default function Blog() {
       >
         <form
           className={
-            `flex w-5/6 sm:w-3/6 h-3/6 rounded border-green-900 dark:border-lime-500 border-solid border-4 p-5 justify-center items-start flex-col space-y-2`
+            `flex w-5/6 sm:w-3/6 md:w-4/6 lg:w-4/6 xl:w-3/6 h-3/6 rounded border-green-900 dark:border-lime-500 border-solid border-4 p-5 justify-center items-start flex-col space-y-2`
           }
           onSubmit={handleSubmit}
         >
@@ -84,7 +83,7 @@ export default function Blog() {
             type='text'
             id='title'
             className={
-              `dark:text-white bg-lime-400 dark:bg-green-900 rounded border-solid border-2 w-full sm:w-1/4 p-2 overflow-x-auto
+              `dark:text-white bg-lime-400 dark:bg-green-900 rounded border-solid border-2 w-full sm:w-2/4 p-2 overflow-x-auto
               ${ titleExists ? 'border-green-900' : 'border-red-900' }`
             }
           >

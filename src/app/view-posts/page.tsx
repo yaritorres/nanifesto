@@ -1,9 +1,11 @@
 'use client'
 import { useEffect, useState } from "react";
+import DeleteConfirmationModal from "../components/deleteConfirmationModal";
 const axios = require('axios').default;
 
 export default function ViewPosts() {
   const [posts, setPosts] = useState([]);
+  const [deletedItem, setDeletedItem] = useState(0);
 
   const handleDelete = (id: Number) => {
     const options = {
@@ -63,6 +65,9 @@ export default function ViewPosts() {
 
   return (
     <>
+      <DeleteConfirmationModal
+        handleDelete={handleDelete} deletedItem={deletedItem} setDeletedItem={setDeletedItem}
+      />
       <div
         className={
           `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center
@@ -82,25 +87,25 @@ export default function ViewPosts() {
               `rounded bg-lime-500 w-full h-fit-content`
             }
           >
-            <label
-              className={
-                `relative flex rounded-t w-full h-auto font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`
-              }
+            <div
+              className={`flex rounded-t w-full h-content font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`}
             >
-              {post.title}
+              <label className={`w-full font-mono text-lime-500 text-2xl select-none`}>
+                {post.title}
+              </label>
               <button
                 data-key={post.id}
                 onClick={
                   e => {
                     const target = e.target as HTMLButtonElement;
-                    handleDelete(target.getAttribute('data-key'));
+                    setDeletedItem(target.getAttribute('data-key'));
                   }
                 }
-                className={`absolute right-4 flex h-fit text-white hover:cursor-pointer border-red-900 border-solid border-2`}
+                className={`flex h-fit text-white hover:cursor-pointer`}
               >
                 delete
               </button>
-            </label>
+            </div>
             <div className={`border-solid border-slate-100 dark:border-slate-900 border-2 w-full mb-2`}></div>
             <p className={`w-full h-auto p-4 font-mono text-slate-900 text-xl select-none`}> {post.body} </p>
             <span
