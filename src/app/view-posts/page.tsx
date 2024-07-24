@@ -76,7 +76,7 @@ export default function ViewPosts() {
       >
         <ul
           className={
-            `flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-4/6 overflow-y-auto space-y-6 p-8`
+            `relative top-6 sm:top-12 flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-5/6 sm:h-4/6 xl:h-3/4 overflow-y-auto space-y-6 p-4`
           }
         >
         {posts.map((post, postKey) =>
@@ -88,9 +88,9 @@ export default function ViewPosts() {
             }
           >
             <div
-              className={`flex rounded-t w-full h-content font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`}
+              className={`border-solid border-red-900 border-2 flex flex-col rounded-t w-full h-content font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`}
             >
-              <label className={`w-full font-mono text-lime-500 text-2xl select-none`}>
+              <label className={`font-mono text-lime-500 text-2xl select-none`}>
                 {post.title}
               </label>
               <button
@@ -101,7 +101,7 @@ export default function ViewPosts() {
                     setDeletedItem(target.getAttribute('data-key'));
                   }
                 }
-                className={`flex h-fit text-white hover:cursor-pointer`}
+                className={`flex h-fit text-lime-800 hover:cursor-pointer transition hover:text-slate-100 place-self-end`}
               >
                 delete
               </button>

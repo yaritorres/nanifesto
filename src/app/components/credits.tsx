@@ -9,7 +9,7 @@ export default function Credits({ creditsOpen, setCreditsOpen }:{ creditsOpen:Bo
       }
       onClick={() => { setCreditsOpen(false); }}
     >
-      <div className={`flex flex-col w-5/6 h-2/6 sm:w-4/6 md:w-3/6 md:h-1/6 lg:w-3/6 lg:h-1/6 xl:w-2/6 space-y-2`}>
+      <div className={`flex flex-col w-5/6 h-2/6 sm:w-4/6 md:w-3/6 md:h-1/6 lg:w-3/6 lg:h-1/6 xl:w-2/6 xl:h-2/6 space-y-2`}>
         <div
           className={
             `flex flex-col w-full h-full bg-slate-900 rounded border-solid border-lime-500 border-2 text-xl text-lime-500 text-center font-mono space-y-4 p-4`
@@ -34,7 +34,7 @@ export default function Credits({ creditsOpen, setCreditsOpen }:{ creditsOpen:Bo
         <button
           onClick={() => { setCreditsOpen(false); }}
           className={
-            `bg-green-900 text-lime-500 rounded p-2 transition-all hover:bg-green-700 hover:cursor-pointer self-end`
+            `bg-green-900 text-lime-500 text-xl rounded p-2 transition-all hover:bg-green-700 hover:cursor-pointer self-end`
           }
         >
             close

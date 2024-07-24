@@ -10,15 +10,14 @@ export default function DeleteConfirmationModal(
     >
       <div
         className={
-          `flex flex-col w-5/6 sm:w-4/6 md:w-3/6 h-2/6 bg-slate-900 rounded text-2xl text-lime-500 items-center justify-center font-mono space-y-4`
+          `flex flex-col w-5/6 sm:w-4/6 md:w-3/6 xl:w-2/6 h-2/6 bg-slate-900 rounded text-2xl text-lime-500 items-center justify-center font-mono space-y-4`
         }
       >
-        <span className={`text-3xl`}> are you sure? </span>
+        <span className={`text-slate-100 text-3xl`}> are you sure? </span>
         <button
           onClick={() => { setDeletedItem(0); }}
           className={
-            `w-1/3 font-mono p-2 text-center text-lime-500 rounded border-lime-500 border-solid border-2 select-none
-            transition-all hover:bg-lime-500 hover:text-slate-900`
+            `bg-green-900 text-lime-500 text-2xl rounded p-2 transition-all hover:bg-green-700 hover:cursor-pointer`
           }
         >
           cancel
@@ -26,8 +25,7 @@ export default function DeleteConfirmationModal(
         <button
           onClick={ () => { handleDelete(deletedItem); setDeletedItem(0); } }
           className={
-            `w-1/3 font-mono p-2 text-center text-lime-500 rounded border-lime-500 border-solid border-2 select-none
-            transition-all hover:bg-lime-500 hover:text-slate-900`
+            `bg-green-900 text-lime-500 text-2xl rounded p-2 transition-all hover:bg-green-700 hover:cursor-pointer`
           }
         >
           delete
