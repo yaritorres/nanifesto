@@ -1,9 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react';
 import HamburgerMenu from '../components/hamburgerMenu';
+import Credits from '../components/credits';
 
 export default function Settings() {
   const [dark, setDark] = useState('');
+  const [creditsOpen, setCreditsOpen] = useState(false);
+
   const handleLightSwitch = () => {
     if (dark === 'dark' || dark === '') {
       setDark('light');
@@ -33,17 +36,24 @@ export default function Settings() {
 
   return(
     <>
+      <Credits creditsOpen={creditsOpen} setCreditsOpen={setCreditsOpen} />
       <div className={`flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center`}>
         <div
           className={
-            `flex flex-col justify-center items-center space-y-4 w-3/6 h-3/6 rounded border-solid border-lime-500 border-4`
+            `flex flex-col justify-center items-center space-y-4 w-4/6 h-2/6 md:w-3/6 rounded border-solid border-lime-500 border-4`
           }
         >
           <span
-            className={`font-mono text-lime-500 text-3xl hover:cursor-pointer transition hover:text-green-900`}
+            className={`font-mono text-lime-500 text-3xl lg:text-4xl hover:cursor-pointer transition hover:text-green-900`}
             onClick={handleLightSwitch}
           >
-            { dark === 'light' ? 'Dark Mode' : 'Light Mode' }
+            { dark === 'light' ? 'dark mode' : 'light mode' }
+          </span>
+          <span
+            className={`font-mono text-lime-500 text-3xl lg:text-4xl hover:cursor-pointer transition hover:text-green-900`}
+            onClick={() => { setCreditsOpen(true); }}
+          >
+            credits
           </span>
         </div>
       </div>
