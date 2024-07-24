@@ -26,12 +26,12 @@ export default function Home() {
       >
         <div
           className={
-            `flex flex-col w-5/6 sm:w-2/4 sm:flex space-y-4`
+            `flex flex-col w-5/6 sm:w-2/4 sm:flex lg:w-4/6 xl:w-2/4 space-y-4`
           }
         >
           <Link
             className={
-              `font-mono p-4 text-2xl text-center text-lime-400 rounded border-lime-500 border-solid border-2 select-none
+              `font-mono p-4 text-2xl lg:text-3xl text-center text-lime-400 rounded border-lime-500 border-solid border-2 select-none
               transition-all hover:bg-lime-500 hover:text-slate-900`
             }
             href='/new-post'
@@ -40,7 +40,7 @@ export default function Home() {
           </Link>
           <Link
             className={
-              `font-mono p-4 text-2xl text-center text-lime-400 rounded border-lime-500 border-solid border-2 select-none
+              `font-mono p-4 text-2xl lg:text-3xl text-center text-lime-400 rounded border-lime-500 border-solid border-2 select-none
               transition-all hover:bg-lime-500 hover:text-slate-900`
             }
             href='/view-posts'

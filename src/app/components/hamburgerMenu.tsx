@@ -12,7 +12,7 @@ export default function HamburgerMenu() {
         onClick={handleHam}
         className={
           `fixed top-2 sm:top-24 left-2 flex flex-col space-y-1 h-12 w-14 bg-green-900 rounded justify-center items-center
-          transition hover:bg-green-700 z-50`
+          transition hover:bg-green-700 z-40`
         }
       >
         <span
@@ -45,7 +45,7 @@ export default function HamburgerMenu() {
         }
       >
         <Link
-          onClick={ ()=> { setHamOpen(false) } }
+          onClick={handleHam}
           href='/'
           className={
             `text-xl block font-mono text-green-900 transition hover:text-green-700
@@ -55,7 +55,7 @@ export default function HamburgerMenu() {
           Home
         </Link>
         <Link
-          onClick={ ()=> { setHamOpen(false) } }
+          onClick={handleHam}
           href='/new-post'
           className={`
             text-xl block font-mono text-green-900 transition hover:text-green-700
@@ -65,7 +65,7 @@ export default function HamburgerMenu() {
           New Post
         </Link>
         <Link
-          onClick={ ()=> { setHamOpen(false) } }
+          onClick={handleHam}
           href='/view-posts'
           className={`
             text-xl block font-mono text-green-900 transition hover:text-green-700
@@ -75,7 +75,7 @@ export default function HamburgerMenu() {
           View Posts
         </Link>
         <Link
-          onClick={ ()=> { setHamOpen(false) } }
+          onClick={handleHam}
           href='/settings'
           className={`
             text-xl block font-mono text-green-900 transition hover:text-green-700
@@ -87,8 +87,9 @@ export default function HamburgerMenu() {
       </ul>
       <div
         className={
-          `fixed w-screen h-screen bg-transparent z-40 inset-0 transition-all ${ hamOpen ? 'backdrop-blur-sm' : 'hidden' }`
+          `fixed w-screen h-screen bg-transparent inset-0 transition-all ${ hamOpen ? 'backdrop-blur-sm' : 'hidden' }`
         }
+        onClick={handleHam}
       >
       </div>
     </>
