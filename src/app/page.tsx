@@ -13,7 +13,7 @@ export default function Home() {
       document.documentElement.classList.add('dark');
       window.localStorage.setItem('theme', 'dark');
     } else {
-      document.documentElement.classList.add(savedMode);
+      document.documentElement.classList.add(savedMode || 'dark');
     }
   }, []);
 
@@ -31,8 +31,7 @@ export default function Home() {
         >
           <Link
             className={
-              `font-mono p-4 text-2xl lg:text-3xl text-center text-lime-400 rounded border-lime-500 border-solid border-2 select-none
-              transition-all hover:bg-lime-500 hover:text-slate-900`
+              `bg-green-900 text-lime-500 font-mono text-2xl lg:text-3xl text-center rounded p-4 hover:cursor-pointer transition hover:bg-green-700`
             }
             href='/new-post'
           >
@@ -40,8 +39,7 @@ export default function Home() {
           </Link>
           <Link
             className={
-              `font-mono p-4 text-2xl lg:text-3xl text-center text-lime-400 rounded border-lime-500 border-solid border-2 select-none
-              transition-all hover:bg-lime-500 hover:text-slate-900`
+              `bg-green-900 text-lime-500 font-mono text-2xl lg:text-3xl text-center rounded p-4 hover:cursor-pointer transition hover:bg-green-700`
             }
             href='/view-posts'
           >

@@ -40,8 +40,8 @@ export default function HamburgerMenu() {
       </button>
       <ul
         className={
-          `fixed top-16 sm:top-40 left-2 bg-lime-500 p-4 h-fit-content w-40 rounded flex flex-col justify-center items-center z-40 transition-all duration-300 z-50
-          ${ hamOpen ? 'left-2 opacity-100' : '-left-1/4 hidden'}`
+          `fixed top-16 sm:top-40 left-2 bg-lime-500 p-4 h-fit-content w-40 rounded flex flex-col justify-center items-center z-40
+          transition-all duration-300 ${ hamOpen ? 'left-2' : '-left-2/4 opacity-none'}`
         }
       >
         <Link
@@ -49,7 +49,7 @@ export default function HamburgerMenu() {
           href='/'
           className={
             `text-xl block font-mono text-green-900 transition hover:text-green-700
-            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'hidden' }`
+            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-none' }`
           }
         >
           Home
@@ -59,7 +59,7 @@ export default function HamburgerMenu() {
           href='/new-post'
           className={`
             text-xl block font-mono text-green-900 transition hover:text-green-700
-            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'hidden' }`
+            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-none' }`
           }
         >
           New Post
@@ -69,7 +69,7 @@ export default function HamburgerMenu() {
           href='/view-posts'
           className={`
             text-xl block font-mono text-green-900 transition hover:text-green-700
-            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'hidden' }`
+            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-none' }`
           }
         >
           View Posts
@@ -79,7 +79,7 @@ export default function HamburgerMenu() {
           href='/settings'
           className={`
             text-xl block font-mono text-green-900 transition hover:text-green-700
-            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-0' }`
+            transition-all ${ hamOpen ? 'opacity-100 delay-100' : 'opacity-none' }`
           }
         >
           Settings
@@ -87,7 +87,8 @@ export default function HamburgerMenu() {
       </ul>
       <div
         className={
-          `fixed w-screen h-screen bg-transparent inset-0 transition-all ${ hamOpen ? 'backdrop-blur-sm' : 'hidden' }`
+          `fixed w-screen h-screen bg-transparent inset-0 transition-all duration-300
+          ${ hamOpen ? 'backdrop-blur-sm animate-fastFadeIn' : 'hidden' }`
         }
         onClick={handleHam}
       >

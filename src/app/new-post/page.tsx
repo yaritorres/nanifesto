@@ -5,7 +5,7 @@ import PostedAlert from "../components/postedAlert";
 const axios = require('axios').default;
 
 export default function Blog() {
-  const [posted, setPosted] = useState(undefined);
+  const [posted, setPosted] = useState(false);
   const [titleExists, setTitleExists] = useState(true);
   const [bodyExists, setBodyExists] = useState(true);
   const router = useRouter();
@@ -13,9 +13,7 @@ export default function Blog() {
     router.push('/view-posts');
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     let title = `${document.getElementById('title').value}`;
     let body = `${document.getElementById('body').value}`;
 
@@ -26,15 +24,13 @@ export default function Blog() {
     } else if (!title && body) {
       setTitleExists(false);
       setBodyExists(true);
-      setPosted(false);
     } else if (title && !body) {
       setTitleExists(true);
       setBodyExists(false);
-      setPosted(false);
     }
   }
 
-  const savePost = (title, body) => {
+  const savePost = (title:string, body:string) => {
     const options = {
       url: 'http://localhost:3000/posts',
       headers: {}
@@ -46,7 +42,6 @@ export default function Blog() {
       console.log('posted!');
     })
     .catch(err => {
-      setPosted(false);
       console.log('womp womp, no post:', err);
     })
   }
@@ -60,7 +55,7 @@ export default function Blog() {
       document.documentElement.classList.add('dark');
       window.localStorage.setItem('theme', 'dark');
     } else {
-      document.documentElement.classList.add(savedMode);
+      document.documentElement.classList.add(savedMode || 'dark');
     }
   }, []);
 
@@ -76,7 +71,7 @@ export default function Blog() {
           className={
             `relative xl:top-10 flex w-5/6 sm:w-3/6 md:w-4/6 lg:w-4/6 xl:w-3/6 h-3/6 xl:h-4/6 rounded border-green-900 dark:border-lime-500 border-solid border-4 p-5 justify-center items-start flex-col space-y-2`
           }
-          onSubmit={handleSubmit}
+          onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}
         >
           <label className='font-mono text-green-900 dark:text-lime-500 select-none'> title </label>
           <input
@@ -92,8 +87,7 @@ export default function Blog() {
           <textarea
             id='body'
             className={
-              `dark:text-white bg-lime-400 dark:bg-green-900 rounded border-solid border-2 border-green-900 w-full h-full p-2 overflow-y-auto resize-none
-              ${ bodyExists ? 'border-green-900' : 'border-red-900' }`
+              `dark:text-white bg-lime-400 dark:bg-green-900 rounded border-solid border-2 border-green-900 w-full h-full p-2 overflow-y-auto resize-none ${ bodyExists ? 'border-green-900' : 'border-red-900' }`
             }
             >
           </textarea>
@@ -101,7 +95,7 @@ export default function Blog() {
             type='submit'
             value='save and post'
             className={
-              `bg-green-900 text-lime-500 rounded p-2 self-end transition-all hover:bg-green-700 hover:cursor-pointer`
+              `bg-green-900 font-mono text-lime-500 rounded p-2 self-end transition-all hover:bg-green-700 hover:cursor-pointer`
             }
           >
           </input>
