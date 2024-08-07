@@ -45,7 +45,7 @@ const config: Config = {
         ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1)',
         fadeOut: 'fadeOut 1.5s linear forwards',
         fadeIn: 'fadeIn 3s linear forwards',
-        fastFadeIn: 'fastFadeIn 0.2s linear forwards',
+        fastFadeIn: 'fastFadeIn 0.5s linear forwards',
       }
     },
   },

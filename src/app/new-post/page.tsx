@@ -14,8 +14,8 @@ export default function Blog() {
   }
 
   const handleSubmit = () => {
-    let title = `${document.getElementById('title').value}`;
-    let body = `${document.getElementById('body').value}`;
+    let title = `${document.getElementById('title')?.value}`;
+    let body = `${document.getElementById('body')?.value}`;
 
     if (title && body) {
       setTitleExists(true);
