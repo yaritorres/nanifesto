@@ -76,7 +76,7 @@ export default function ViewPosts() {
       >
         <ul
           className={
-            `relative top-6 sm:top-12 flex flex-col border-green-900 border-solid border-4 rounded-lg w-5/6 h-5/6 sm:h-4/6 xl:h-3/4 overflow-y-auto space-y-6 p-4`
+            `relative top-6 sm:top-12 flex flex-col w-5/6 h-5/6 sm:h-4/6 xl:h-3/4 overflow-y-auto space-y-6 pr-4`
           }
         >
         {posts.map((post, postKey) =>
@@ -88,7 +88,7 @@ export default function ViewPosts() {
             }
           >
             <div
-              className={`border-solid border-red-900 border-2 flex flex-col rounded-t w-full h-content font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`}
+              className={`flex flex-col rounded-t w-full h-content font-mono text-lime-500 text-2xl bg-lime-700 p-4 select-none`}
             >
               <label className={`font-mono text-lime-500 text-2xl select-none`}>
                 {post.title}
