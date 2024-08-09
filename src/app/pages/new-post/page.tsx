@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import PostedAlert from "../components/postedAlert";
+import PostedAlert from "../../components/postedAlert";
 const axios = require('axios').default;
 
 export default function Blog() {
@@ -10,7 +10,7 @@ export default function Blog() {
   const [bodyExists, setBodyExists] = useState(true);
   const router = useRouter();
   const handleRouting = () => {
-    router.push('/view-posts');
+    router.push('/pages/view-posts');
   }
 
   const handleSubmit = () => {

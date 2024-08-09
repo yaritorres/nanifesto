@@ -27,11 +27,27 @@ const newPost = ({ title, body }) => {
 const deletePost = ({ id }) => {
   return db.query(`
     DELETE FROM posts WHERE id = ${id}
-  `)
-}
+  `);
+};
+
+const addUser = async (username, password) => {
+  return await db.query(`
+    INSERT INTO authenticated (username, password)
+      VALUES ('${username}', '${password}')
+  `);
+};
+
+const findUser = async (username) => {
+  return await db.query(`
+    SELECT * FROM authenticated WHERE username = '${username}'
+  `);
+};
+
 
 module.exports = {
   getPosts: getPosts,
   newPost: newPost,
   deletePost: deletePost,
+  addUser: addUser,
+  findUser: findUser,
 };

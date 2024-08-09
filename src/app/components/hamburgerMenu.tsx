@@ -46,7 +46,7 @@ export default function HamburgerMenu() {
       >
         <Link
           onClick={handleHam}
-          href='/'
+          href='/pages/home'
           className={
             `relative text-xl block font-mono text-green-900 transition hover:text-green-700
             transition-all delay-50 ${ hamOpen ? 'left-0 opacity-100' : '-left-24 opacity-0' }`
@@ -56,7 +56,7 @@ export default function HamburgerMenu() {
         </Link>
         <Link
           onClick={handleHam}
-          href='/new-post'
+          href='/pages/new-post'
           className={`
             relative text-xl block font-mono text-green-900 transition hover:text-green-700
             transition-all delay-100 ${ hamOpen ? 'left-0 opacity-100' : '-left-24 opacity-0' }`
@@ -66,7 +66,7 @@ export default function HamburgerMenu() {
         </Link>
         <Link
           onClick={handleHam}
-          href='/view-posts'
+          href='/pages/view-posts'
           className={`
             relative text-xl block font-mono text-green-900 transition hover:text-green-700
             transition-all delay-200 ${ hamOpen ? 'left-0 opacity-100' : '-left-24 opacity-0' }`
@@ -76,10 +76,20 @@ export default function HamburgerMenu() {
         </Link>
         <Link
           onClick={handleHam}
-          href='/settings'
+          href='/pages/login'
           className={`
             relative text-xl block font-mono text-green-900 transition hover:text-green-700
             transition-all delay-300 ${ hamOpen ? 'left-0 opacity-100' : '-left-24 opacity-0' }`
+          }
+        >
+          Log In
+        </Link>
+        <Link
+          onClick={handleHam}
+          href='/pages/settings'
+          className={`
+            relative text-xl block font-mono text-green-900 transition hover:text-green-700
+            transition-all delay-500 ${ hamOpen ? 'left-0 opacity-100' : '-left-24 opacity-0' }`
           }
         >
           Settings

@@ -1,13 +1,13 @@
 'use client'
 import { useEffect, useState } from "react";
-import DeleteConfirmationModal from "../components/deleteConfirmationModal";
+import DeleteConfirmationModal from "../../components/deleteConfirmationModal";
 const axios = require('axios').default;
 
 export default function ViewPosts() {
   const [posts, setPosts] = useState([]);
   const [deletedItem, setDeletedItem] = useState(0);
 
-  const handleDelete = (id: Number) => {
+  const handleDelete = ( id:number ) => {
     const options = {
       url: 'http://localhost:3000/posts',
       headers: {}
