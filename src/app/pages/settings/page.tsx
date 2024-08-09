@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
-import HamburgerMenu from '../components/hamburgerMenu';
-import Credits from '../components/credits';
+import Credits from '../../components/credits';
 
 export default function Settings() {
   const [dark, setDark] = useState('');
@@ -29,8 +28,8 @@ export default function Settings() {
       window.localStorage.setItem('theme', 'dark');
       setDark('dark');
     } else {
-      document.documentElement.classList.add(savedMode);
-      setDark(savedMode);
+      document.documentElement.classList.add(savedMode || 'dark');
+      setDark(savedMode || 'dark');
     }
   }, [dark]);
 
