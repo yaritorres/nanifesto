@@ -1,14 +1,16 @@
 'use client'
 const axios = require('axios').default;
+import FailedLoginAlert from "@/app/components/failedLoginAlert";
 import LoginAlert from "@/app/components/loginAlert";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from 'react';
 
 export default function Login() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [failedLogin, setFailedLogin] = useState(false);
   const router = useRouter();
   const handleRouting = () => {
-    router.push('/pages/home');
+    // router.push('/pages/home');
   }
 
   const handleLogin = () => {
@@ -21,12 +23,14 @@ export default function Login() {
     let password = `${document.getElementById('password')?.value}`;
 
     axios.post(options.url, {username: username, password: password}, {headers: options.headers})
-    .then(() => {
+    .then(response => {
+      console.log(response);
       console.log('Logged in!');
       setLoggedIn(true);
     })
-    .catch(err => {
-      console.log('womp womp, no post:', err);
+    .catch(() => {
+      setFailedLogin(true);
+      console.log('Incorrect username or password!');
     })
   }
 
@@ -46,6 +50,7 @@ export default function Login() {
   return (
     <>
       <LoginAlert loggedIn={loggedIn} setLoggedIn={setLoggedIn} handleRouting={handleRouting} />
+      <FailedLoginAlert failedLogin={failedLogin} setFailedLogin={setFailedLogin} />
       <div
         className={
           `flex w-screen h-screen bg-slate-100 dark:bg-slate-900 place-content-center place-items-center`

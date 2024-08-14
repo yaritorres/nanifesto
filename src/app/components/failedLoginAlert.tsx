@@ -1,8 +1,9 @@
-export default function LoginAlert(
-  { failedLogin }:{ failedLogin:Boolean }
+export default function FailedLoginAlert(
+  { failedLogin, setFailedLogin }:{ failedLogin:Boolean, setFailedLogin:Function }
 ) {
   return (
     <div
+      onClick={() => { setFailedLogin(false) }}
       className={
         `flex fixed w-screen h-screen backdrop-blur-sm items-center justify-center z-50
         ${failedLogin ? '' : 'hidden'}`
