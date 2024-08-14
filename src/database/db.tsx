@@ -37,8 +37,8 @@ const addUser = async (username, password) => {
   `);
 };
 
-const findUser = async (username) => {
-  return await db.query(`
+const findUser = (username) => {
+  return db.query(`
     SELECT * FROM authenticated WHERE username = '${username}'
   `);
 };
