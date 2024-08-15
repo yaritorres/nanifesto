@@ -5,40 +5,15 @@ const path = require('path');
 const cors = require('cors');
 const postgres = require('./../database/db.tsx');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const testToken = 'testToken';
 
 app.use(express.json());
 app.use(cors());
 
-app.listen(process.env.PORT);
-console.log(`Listening on port ${process.env.PORT}`);
-
-app.get(`/posts`, (req, res) => {
-  postgres.getPosts()
-  .then(data => {
-    res.send(data.rows);
-  })
-  .catch(err => console.log(err));
-});
-
-app.post('/posts', (req, res) => {
-  postgres.newPost(req.body)
-  .then(response => {
-    res.send(response);
-  })
-  .catch(err => {
-    console.log('cant post:', err);
-  })
-});
-
-app.put('/posts', (req, res) => {
-  postgres.deletePost(req.body)
-  .then(response => {
-    res.send(response);
-  })
-  .catch(err => {
-    console.log('couldnt delete:', err);
-  })
-});
+app.listen(4000);
+console.log(`Listening on port 4000`);
 
 app.post('/users', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -58,18 +33,20 @@ app.post('/users', async (req, res) => {
 });
 
 app.post('/users/login', async (req, res) => {
-  const user = req.body.username;
+  const username = req.body.username;
+  const user = { name: username };
   const password = req.body.password;
 
-  if (user == null) {
+  if (username == null) {
     return res.status(400).send('User not found.');
   }
   try {
-    postgres.findUser(user)
+    postgres.findUser(username)
     .then(async response => {
       if (response.rows[0]) {
         if (await bcrypt.compare(password, response.rows[0].password)) {
-          res.status(201).send('User logged in successfully.')
+          const accessToken = jwt.sign(user, testToken, { expiresIn: '1hr'});
+          res.json({ accessToken: accessToken });
         } else {
           res.status(500).send('Incorrect username or password')
         }
@@ -83,4 +60,4 @@ app.post('/users/login', async (req, res) => {
     console.log(error)
     res.status(500).send()
   }
-})
+});

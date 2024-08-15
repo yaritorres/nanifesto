@@ -30,10 +30,10 @@ const deletePost = ({ id }) => {
   `);
 };
 
-const addUser = async (username, password) => {
-  return await db.query(`
-    INSERT INTO authenticated (username, password)
-      VALUES ('${username}', '${password}')
+const addUser = (username, password) => {
+  return db.query(`
+    INSERT INTO authenticated (username, password, admin)
+      VALUES ('${username}', '${password}', false)
   `);
 };
 
