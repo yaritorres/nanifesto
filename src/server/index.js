@@ -7,8 +7,6 @@ const postgres = require('./../database/db.tsx');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const testToken = 'testToken'
-
 app.use(express.json());
 app.use(cors());
 
@@ -27,7 +25,7 @@ app.get(`/posts`, authenticateToken, (req, res) => {
 
 
 // ADD NEW POST
-app.post('/posts', (req, res) => {
+app.post('/posts', authenticateToken, (req, res) => {
   postgres.newPost(req.body)
   .then(response => {
     res.send(response);
@@ -39,7 +37,7 @@ app.post('/posts', (req, res) => {
 
 
 // DELETE POST
-app.put('/posts', (req, res) => {
+app.put('/posts', authenticateToken, (req, res) => {
   postgres.deletePost(req.body)
   .then(response => {
     res.send(response);
@@ -67,7 +65,7 @@ function authenticateToken (req, res, next) {
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, testToken, (err, user) => {
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
     if (err) {
       console.log(err);
       return res.sendStatus(403);

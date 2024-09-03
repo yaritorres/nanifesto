@@ -59,6 +59,34 @@ export default function Blog() {
     }
   }, []);
 
+  useEffect(() => {
+    const options = {
+      url: 'http://localhost:3000/find-user',
+      headers: {
+        "Authorization": `Bearer ${window.localStorage.accessToken}`
+      }
+    };
+
+    async function findUser () {
+      try {
+        let result;
+
+        result = await axios.get(options.url, {headers: options.headers});
+
+        if(result.data.admin) {
+          return;
+        } else {
+          throw Error;
+        };
+      }
+      catch (err) {
+        console.log(err);
+      }
+    };
+
+    findUser()
+  }, [])
+
   return (
     <>
       <PostedAlert posted={posted} setPosted={setPosted} handleRouting={handleRouting} />

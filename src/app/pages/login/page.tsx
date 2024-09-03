@@ -9,6 +9,7 @@ export default function Login() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [failedLogin, setFailedLogin] = useState(false);
   const router = useRouter();
+
   const handleRouting = () => {
     router.push('/pages/home');
   }
@@ -23,6 +24,25 @@ export default function Login() {
     let password = `${document.getElementById('password')?.value}`;
 
     axios.post(options.url, {username: username, password: password}, {headers: options.headers})
+    .then(response => {
+      console.log(response);
+      console.log('Logged in!');
+      window.localStorage.setItem('accessToken', response.data.accessToken);
+      setLoggedIn(true);
+    })
+    .catch(() => {
+      setFailedLogin(true);
+      console.log('Incorrect username or password!');
+    })
+  }
+
+  const handleGuestLogin = () => {
+    const options = {
+      url: 'http://localhost:4000/users/login',
+      headers: {}
+    };
+
+    axios.post(options.url, {username: 'guest', password: 'guest'}, {headers: options.headers})
     .then(response => {
       console.log(response);
       console.log('Logged in!');
@@ -80,7 +100,7 @@ export default function Login() {
               >
               </input>
           </form>
-          <button className={`text-lime-500`}> continue as guest </button>
+          <button onClick={handleGuestLogin} className={`text-lime-500`}> continue as guest </button>
         </div>
       </div>
     </>
