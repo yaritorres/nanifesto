@@ -6,6 +6,7 @@ const axios = require('axios').default;
 export default function ViewPosts() {
   const [posts, setPosts] = useState([]);
   const [deletedItem, setDeletedItem] = useState(0);
+  const [adminStatus, setAdminStatus] = useState();
 
   const handleDelete = ( id:number ) => {
     const options = {
@@ -13,21 +14,47 @@ export default function ViewPosts() {
       headers: {}
     };
 
-    document.getElementById(id)?.classList.add('animate-fadeOut')
+    document.getElementById(id)?.classList.add('animate-fadeOut');
 
     axios.put(options.url, {id: id}, {headers: options.headers})
-    .then(response => {
-      console.log(response);
+    .then(() => {
+      console.log('Deleted!');
     })
     .catch(err => console.log(err))
-  }
+  };
+
+  useEffect(() => {
+    const options = {
+      url: 'http://localhost:3000/find-user',
+      headers: {
+        "Authorization": `Bearer ${window.localStorage.accessToken}`
+      }
+    };
+
+    async function findUser () {
+      try {
+        let result;
+
+        result = await axios.get(options.url, {headers: options.headers});
+
+        setAdminStatus(result.data.admin);
+      }
+      catch (err) {
+        console.log(err);
+      }
+    };
+
+    findUser()
+  }, [])
 
   // GRABS CURRENT POSTS FOUND IN DATABASE AND CUTS OFF PART OF THE DATE THAT
   // IS BEING ADDED ON BY THE DATABASE FOR SOME REASON (IT ADDS TIME POSTED BUT DEFAULTS TO 00:00:00)
   useEffect(() => {
     const options = {
       url: 'http://localhost:3000/posts',
-      headers: {}
+      headers: {
+        "Authorization": `Bearer ${window.localStorage.accessToken}`
+      }
     };
 
     const cleanDate = (posts) => {
@@ -59,7 +86,7 @@ export default function ViewPosts() {
       document.documentElement.classList.add('dark');
       window.localStorage.setItem('theme', 'dark');
     } else {
-      document.documentElement.classList.add(savedMode);
+      document.documentElement.classList.add(savedMode || 'dark');
     }
   });
 
@@ -101,7 +128,8 @@ export default function ViewPosts() {
                     setDeletedItem(target.getAttribute('data-key'));
                   }
                 }
-                className={`flex h-fit text-lime-800 hover:cursor-pointer transition hover:text-slate-100 place-self-end`}
+                className={`flex h-fit text-lime-800 hover:cursor-pointer transition hover:text-slate-100 place-self-end
+                  ${adminStatus ? '' : 'hidden'}`}
               >
                 delete
               </button>

@@ -1,10 +1,36 @@
 'use client'
 import Link from 'next/link';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+const axios = require('axios').default;
 
 export default function HamburgerMenu() {
   const [hamOpen, setHamOpen] = useState(false);
+  const [adminStatus, setAdminStatus] = useState();
   const handleHam = () => { setHamOpen(!hamOpen) };
+
+  useEffect(() => {
+    const options = {
+      url: 'http://localhost:3000/find-user',
+      headers: {
+        "Authorization": `Bearer ${window.localStorage.accessToken}`
+      }
+    };
+
+    async function findUser () {
+      try {
+        let result;
+
+        result = await axios.get(options.url, {headers: options.headers});
+
+        setAdminStatus(result.data.admin);
+      }
+      catch (err) {
+        console.log(err);
+      }
+    };
+
+    findUser()
+  }, [])
 
   return (
     <>
@@ -59,7 +85,9 @@ export default function HamburgerMenu() {
           href='/pages/new-post'
           className={`
             relative text-xl block font-mono text-green-900 transition hover:text-green-700
-            transition-all delay-100 ${ hamOpen ? 'left-0 opacity-100' : '-left-24 opacity-0' }`
+            transition-all delay-100
+            ${ hamOpen ? 'left-0 opacity-100' : '-left-24 opacity-0' }
+            ${ adminStatus ? '' : 'hidden' }`
           }
         >
           New Post

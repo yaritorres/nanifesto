@@ -9,13 +9,14 @@ export default function Login() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [failedLogin, setFailedLogin] = useState(false);
   const router = useRouter();
+
   const handleRouting = () => {
-    // router.push('/pages/home');
+    router.push('/pages/home');
   }
 
   const handleLogin = () => {
     const options = {
-      url: 'http://localhost:3000/users/login',
+      url: 'http://localhost:4000/users/login',
       headers: {}
     };
 
@@ -26,6 +27,26 @@ export default function Login() {
     .then(response => {
       console.log(response);
       console.log('Logged in!');
+      window.localStorage.setItem('accessToken', response.data.accessToken);
+      setLoggedIn(true);
+    })
+    .catch(() => {
+      setFailedLogin(true);
+      console.log('Incorrect username or password!');
+    })
+  }
+
+  const handleGuestLogin = () => {
+    const options = {
+      url: 'http://localhost:4000/users/login',
+      headers: {}
+    };
+
+    axios.post(options.url, {username: 'guest', password: 'guest'}, {headers: options.headers})
+    .then(response => {
+      console.log(response);
+      console.log('Logged in!');
+      window.localStorage.setItem('accessToken', response.data.accessToken);
       setLoggedIn(true);
     })
     .catch(() => {
@@ -68,7 +89,7 @@ export default function Login() {
               <label className={`text-lime-500 font-mono text-xl`}> username </label>
               <input id='username' type='text' className={`w-full h-12 rounded bg-green-600 mb-4 dark:text-white p-4`}></input>
               <label className={`text-lime-500 font-mono text-xl`}> password </label>
-              <input id='password' type='text' className={`w-full h-12 rounded bg-green-600 dark:text-white p-4`}></input>
+              <input id='password' type='password' className={`w-full h-12 rounded bg-green-600 dark:text-white p-4`}></input>
             </div>
             <input
                 type='submit'
@@ -79,7 +100,7 @@ export default function Login() {
               >
               </input>
           </form>
-          <button className={`text-lime-500`}> continue as guest </button>
+          <button onClick={handleGuestLogin} className={`text-lime-500`}> continue as guest </button>
         </div>
       </div>
     </>
